@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Main {
+public class 최소최대 {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
