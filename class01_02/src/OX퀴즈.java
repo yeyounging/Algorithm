@@ -5,18 +5,18 @@ public class OX퀴즈 {
     public static void main(String args[]){
         Scanner scanner = new Scanner(System.in);
         int num = scanner.nextInt();
+        int score[] = new int[num];
 
         for(int i=0;i<num;i++){
             String str = scanner.next();
             String[] arr = str.split("");
-            int score[] = new int[num];
 
             for(int j=0;j<str.length();j++){
                int cnt=0;
-                if(arr[j]=="O"){
+                if(arr[j].equals("O")){
                     //연속된 0개수세기
                    for(int k=j;k<str.length();k++){
-                       if(arr[k]=="X") break;
+                       if(arr[k].equals("X")) break;
                        cnt++;
                    }
                    j+=cnt-1;
@@ -27,7 +27,8 @@ public class OX퀴즈 {
                    }
                        }
                    }
-                System.out.println(score[i]);
                }
+        for(int i=0;i<num;i++)
+            System.out.println(score[i]);
             }
         }
