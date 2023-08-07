@@ -46,19 +46,21 @@ public class Main {
             System.out.println(words[index[i]]);
         }
 
-        int answer[] = new int[cnt];
-        answer[0]=0;
         int check[] = new int[num];
         int cnt_check=0;
 
 
+        int start=0;
+        int end=0;
         for(int i=1;i<cnt;i++){
-            if (!(words[index[i]].equals(words[index[i-1]]))) {
-                answer[cnt]=index[i];
-            }
-            else {
+           if(words[index[i]].length()>words[index[i-1]].length()){
+               end=i;
+           }
+           for(int j=start;j<end;j++){
+               //같은 문자열길이안에서 사전순 정렬
 
-            }
+           }
+
         }
 
 
