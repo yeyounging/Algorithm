@@ -42,25 +42,47 @@ public class Main {
                 }
             }
 
-        for(int i=0;i<cnt;i++){
-            System.out.println(words[index[i]]);
-        }
-
-        int check[] = new int[num];
-        int cnt_check=0;
 
 
         int start=0;
         int end=0;
+
+
         for(int i=1;i<cnt;i++){
            if(words[index[i]].length()>words[index[i-1]].length()){
                end=i;
+               //같은 문자열길이안에서 사전순 정렬 -최댓값정렬
+               for(int j=end;j>start;j--){
+                   int max_index=start;
+                   for(int h=start;h<j;h++){
+                       if (words[index[h]].compareTo(words[index[max_index]])>0)
+                       {
+                           max_index = index[h];
+                       }
+                   }
+                   int temp = index[j-1];
+                   index[j-1]=max_index;
+                   index[max_index]= temp;
+               }
+               start=i;
            }
-           for(int j=start;j<end;j++){
-               //같은 문자열길이안에서 사전순 정렬
+        }
+        for(int j=cnt;j>start;j--){
+            int max_index=start;
+            for(int h=start;h<j;h++){
+                if (words[index[h]].compareTo(words[index[max_index]])>0)
+                {
+                    max_index = index[h];
+                }
+            }
+            int temp = index[j-1];
+            index[j-1]=max_index;
+            index[max_index]= temp;
+        }
 
-           }
 
+        for(int i=0;i<cnt;i++){
+            System.out.println(words[index[i]]);
         }
 
 
