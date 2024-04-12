@@ -1,32 +1,24 @@
 import java.io.*;
 
-
 public class Main {
     public static void main (String args[]) throws IOException {
+        //1 2 8 20 38 62
+        //1 6 12 18 24
+        //1 2 3  4  5  6
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        int n_arr = Integer.parseInt(br.readLine());
-
-        StringBuilder sb= new StringBuilder();
-        sb.append(" ");
-        sb.append(br.readLine());
-        sb.append(" ");
-
-        int n_input = Integer.parseInt(br.readLine());
-        String[] input = br.readLine().split(" ");
-
-       String arr = String.valueOf(sb);
-
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        for(int i=0;i<n_input;i++){
-            String temp = " "+input[i]+" ";
+        int input = Integer.parseInt(br.readLine());
 
-            if(arr.contains(temp) == true )
-                bw.write("1\n");
-            else
-                bw.write("0\n");
+        int i=1;
+
+        for(int temp=input-2;temp>=0;i++){
+            temp = temp - 6*i;
         }
+
+        int result = (input==2? 2: i);
+        bw.write(String.valueOf(result));
+        bw.flush();
         bw.close();
 
     }
