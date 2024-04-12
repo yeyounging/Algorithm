@@ -17,7 +17,7 @@ public class 블랙잭 {
             input[i] = Integer.parseInt(inputValues2[i]);
         }
 
-        Arrays.sort(input);
+        //Arrays.sort(input);
 
         int max = 0;
         //큰수부터 더하기
