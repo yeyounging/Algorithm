@@ -1,54 +1,49 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.Arrays;
 
 public class 블랙잭 {
-    public static void main(String[] args) {
+    public static void main (String args[]) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter wr = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        Scanner in = new Scanner(System.in);
+        String[] inputValues = br.readLine().split(" ");
+        int n = Integer.parseInt(inputValues[0]);
+        int m = Integer.parseInt(inputValues[1]);
 
-        int N = in.nextInt();
-        int M = in.nextInt();
-
-        int[] arr = new int[N];
-
-        for (int i = 0; i < N; i++) {
-            arr[i] = in.nextInt();
+        String[] inputValues2 = br.readLine().split(" ");
+        int[] input = new int[n];
+        //입력값 배열에 저장
+        for(int i =0;i<n;i++){
+            input[i] = Integer.parseInt(inputValues2[i]);
         }
 
-        int result = search(arr, N, M);
-        System.out.println(result);
-    }
+        Arrays.sort(input);
 
-
-    // 탐색
-    static int search(int[] arr, int N, int M) {
-        int result = 0;
-
-        // 3개를 고르기 때문에 첫번째 카드는 N - 2 까지만 순회
-        for (int i = 0; i < N - 2; i++) {
-
-            // 두 번째 카드는 첫 번째 카드 다음부터 N - 1 까지만 순회
-            for (int j = i + 1; j < N - 1; j++) {
-
-                // 세 번째 카드는 두 번째 카드 다음부터 N 까지 순회
-                for (int k = j + 1; k < N; k++) {
-
-                    // 3개 카드의 합 변수 temp
-                    int temp = arr[i] + arr[j] + arr[k];
-
-                    // M과 세 카드의 합이 같다면 temp return 및 종료
-                    if (M == temp) {
-                        return temp;
-                    }
-
-                    // 세 카드의 합이 이전 합보다 크면서 M 보다 작을 경우 result 갱신
-                    if(result < temp && temp < M) {
-                        result = temp;
+        int max = 0;
+        //큰수부터 더하기
+        for(int i=n-1;i>=0;i--){
+            int sum1= input[i] ; //init
+            //두번째 수
+            for(int j = i-1;j>=0;j--) {
+                int sum2 = sum1 + input[j];
+                if (sum2 > m) continue;
+                //세번째 수
+                for (int k = j - 1; k >= 0; k--) {
+                    int sum3 = sum2 + input[k];
+                    if (sum3 > m) continue;
+                    //최댓값 비교
+                    if (sum3 > max) {
+                        max = sum3;
+                        break;
                     }
                 }
             }
         }
+        wr.write(String.valueOf(max));
+        wr.flush();
+        wr.close();
 
-        // 모든 순회를 마치면 result 리턴
-        return result;
+
     }
+
 }
