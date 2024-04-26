@@ -1,24 +1,50 @@
 import java.io.*;
+import java.util.*;
 
-public class Main {
-    public static void main(String args[]) throws IOException {
+public class Main{
+    public static void main (String args[]) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine()," ");
+        StringBuilder sb = new StringBuilder();
 
-        int num = Integer.parseInt(br.readLine());
+        int n1 = Integer.parseInt(st.nextToken());
+        int n2 = Integer.parseInt(st.nextToken());
+        int answer1 =1;
+        int answer2=n1*n2;
 
-        int num_5 = 0;
-        int num_3 = 0;
-
-        while(num > 0 && num%5 != 0){
-            num_3++;
-            num-=3;
+        int smallN, largeN = 0;
+        if(n1>n2){
+            smallN = n2;
+            largeN = n1;
         }
-        num_5 = num /5;
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        if (num < 0) bw.write("-1");
-        else bw.write(String.valueOf(num_3+num_5));
-        bw.flush();
-        bw.close();
+        else{
+            smallN = n1;
+            largeN = n2;
+        }
 
+        if(largeN%smallN==0){
+            sb.append(smallN+" "+largeN);
+            System.out.println(sb);
+        }
+        else{       //최대공약수 구하기
+            for(int i = smallN/2; i>1; i--){
+                if(largeN % i == 0 && smallN % i == 0){
+                    answer1 = i;
+                    break;
+                }
+            }
+
+            //최소공배수 구하기
+            for(int i= 2 ; i<smallN ; i++ ){
+                if(largeN*i % smallN == 0) {
+                    answer2 = largeN*i;
+                    break;
+                }
+            }
+
+            sb.append(answer1+" "+answer2);
+            System.out.println(sb);
+
+        }
     }
 }
