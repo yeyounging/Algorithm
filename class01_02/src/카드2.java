@@ -6,7 +6,7 @@ public class 카드2{
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         int input = Integer.parseInt(br.readLine());
-        boolean mode = true; //첫번째 수가 버려지는 경우
+        boolean mode = true; //홀수번째가 버려지는 경우
         int firstN = 1;
         int interval = 1;
 
