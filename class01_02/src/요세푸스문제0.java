@@ -12,23 +12,18 @@ class 요세푸스문제0{
 
         LinkedList<Integer> linked = new LinkedList<>();
 
-        for(int i=0;i<size;i++){
-            linked.add(i+1);
+        for(int i=1;i<=size;i++){
+            linked.add(i);
         }
         bw.write("<");
 
-        int n = 0, i = -1;
-
-        while(linked.size()>1){
-            i+=gap;
-            if(i>= linked.size()){
+        for(int i=gap-1;linked.size()>1;i+=gap-1){
+            if(i>= linked.size()) {
                 i = i % linked.size();
             }
-            n = linked.remove(i);
-            bw.write("삭제할 인덱스 :"+i+"\n");
-            bw.write(n+", ");
+            bw.write(linked.remove(i)+", ");
         }
-        bw.write(">");
+        bw.write(linked.poll() +">");
         bw.flush();
         bw.close();
     }
