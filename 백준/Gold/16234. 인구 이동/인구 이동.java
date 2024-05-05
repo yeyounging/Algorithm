@@ -38,7 +38,6 @@ public class Main {
 
         while(true){
             int[][] included = new int[n][n];
-            flag = 0;
             sum = 0;
             for(int i=0;i<n;i++){
                 for(int j=0;j<n;j++) {
@@ -75,14 +74,11 @@ public class Main {
                                 Node temp = nodes.poll();
                                 arr[temp.i][temp.j] = result;
                             }
-                            if(flag==0){
-                                flag=1;
-                                cnt++;
-                            }
                         }
                         }
                     }
             if (sum==0) break;
+            else cnt++;
         }
         bw.write(String.valueOf(cnt));
         bw.flush();
