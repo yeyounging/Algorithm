@@ -1,42 +1,43 @@
 import java.io.*;
 import java.util.*;
 
+//재귀로 구현
+
 public class Main {
+    static int num;
+    static int cnt=0;
+    static boolean [][] adj = new boolean[100][100];
+    static boolean [] visited = new boolean[100];
     public static void main(String args[]) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        int num = Integer.parseInt((br.readLine()));
+        num = Integer.parseInt((br.readLine()));
         int num2 = Integer.parseInt((br.readLine()));
-
-        boolean [][] adj = new boolean[num][num];
-        boolean [] visited = new boolean[num];
 
         for(int i =0;i<num2;i++){
             StringTokenizer st = new StringTokenizer(br.readLine());
-                int n1 = Integer.parseInt(st.nextToken())-1;
-                int n2 = Integer.parseInt(st.nextToken())-1;
-                adj[n1][n2] = true;
-                adj[n2][n1] = true;
+            int n1 = Integer.parseInt(st.nextToken())-1;
+            int n2 = Integer.parseInt(st.nextToken())-1;
+            adj[n1][n2] = true;
+            adj[n2][n1] = true;
         }
-        int cnt=0;
-        Stack<Integer> stack = new Stack<>();
-        stack.push(0);
-        visited[0]=true;
 
-        while(!stack.isEmpty()){
-            int n = stack.pop();
-            cnt++;
-            for(int i =0;i<num;i++){
-                if(adj[n][i]==true && visited[i]==false) {
-                    stack.push(i);
-                    visited[i]=true;
-                }
-            }
-        }
-        bw.write(String.valueOf(cnt-1));
+        dfs(0);
+
+        bw.write(String.valueOf(cnt));
         bw.flush();
         bw.close();
+    }
+
+    static void dfs(int n){
+        for(int i =1;i<num;i++){
+            if(adj[n][i]==true && visited[i]==false) {
+                visited[i]=true;
+                cnt++;
+                dfs(i);
+            }
+        }
     }
 
 
