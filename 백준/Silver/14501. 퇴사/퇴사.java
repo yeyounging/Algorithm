@@ -2,7 +2,6 @@ import java.io.*;
 import java.util.StringTokenizer;
 
 public class Main{
-
     public static void main(String args[]) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -23,11 +22,8 @@ public class Main{
             if(i+time[i] > num) dp[i] = dp[i+1];
             else dp[i] = Math.max((profit[i]+dp[i+time[i]]),dp[i+1]);
         }
-         bw.write( dp[0]+"");
+         bw.write(String.valueOf(dp[0]));
          bw.flush();;
          bw.close();
     }
-
-
-
 }
