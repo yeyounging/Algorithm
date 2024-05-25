@@ -31,7 +31,6 @@ public class 그림{
             }
         }
 
-        //0,1 0,-1 1,0, -1,0
         int[] index = new int[] {1,0,-1,0};
         int[] index2 = new int[] {0,-1,0,1};
 
