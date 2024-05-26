@@ -29,7 +29,7 @@ public class Main {
     }
 
     static void yap(int index,int cnt, int sum) {
-        if(cnt!=0 && cnt == size && sum==s) ans++;
+        if(cnt == size && sum==s) ans++;
         if(size == cnt) return;
         for(int i=index;i<n;i++){
             sum+=arr[i];
