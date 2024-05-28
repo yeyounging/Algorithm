@@ -7,7 +7,7 @@ class Member {
     int age;
     String name;
 }
-public class Main {
+class 나이순정렬 {
     public static void main(String args[]) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
