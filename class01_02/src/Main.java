@@ -1,35 +1,37 @@
-import java.util.*;
 import java.io.*;
+import java.util.Scanner;
 
-class Main{
-    public static void main(String[] args) throws IOException{
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        int size = Integer.parseInt(st.nextToken());
-        int gap =  Integer.parseInt(st.nextToken());
+public class Main {
+    public static void main(String args[]){
+        Scanner scanner = new Scanner(System.in);
+        int num = scanner.nextInt();
+        int score[] = new int[num];
 
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        for(int i=0;i<num;i++){
+            String str = scanner.next();
+            String[] arr = str.split("");
 
-        LinkedList<Integer> linked = new LinkedList<>();
-
-        for(int i=0;i<size;i++){
-            linked.add(i+1);
-        }
-        bw.write("<");
-
-        int n = 0, i = -1;
-
-        while(linked.size()>1){
-            i+=gap;
-            if(i>= linked.size()){
-                i = i % linked.size();
+            for(int j=0;j<str.length();j++){
+                int cnt=0;
+                if(arr[j].equals("O")){
+                    //연속된 0개수세기
+                    for(int k=j;k<str.length();k++){
+                        if(arr[k].equals("X")) break;
+                        cnt++;
+                    }
+                    j+=cnt-1;
+                    //점수 합하기
+                    while(cnt!=0){
+                        score[i]+=cnt;
+                        cnt--;
+                    }
+                }
             }
-            n = linked.remove(i);
-            bw.write("삭제할 인덱스 :"+i+"\n");
-            bw.write(n+", ");
         }
-        bw.write(">");
-        bw.flush();
-        bw.close();
+        for(int i=0;i<num;i++)
+            System.out.println(score[i]);
     }
-        }
+}
+
+
+}
