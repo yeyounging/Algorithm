@@ -1,40 +1,37 @@
 const fs = require("fs");
 const filePath = process.platform === "linux" ? "/dev/stdin" : "./input.txt";
 const input = fs.readFileSync(filePath).toString().trim().split("\n");
-const [n, m] = input.shift().split(" ").map(Number);
-const map = [];
 
-for (let i of input) {
-  const temp = i.split(" ");
-  map.push(temp);
-}
+const [n, m] = input.shift().split(" ").map(Number);
+const map = input.map(line => line.split(" ").map(Number));
 
 let max_width = 0;
-let width = 0;
 let cnt = 0;
+
+function dfs(x, y) {
+  if (x < 0 || y < 0 || x >= n || y >= m || map[x][y] === 0) return 0;
+
+  map[x][y] = 0;
+  let width = 1;
+
+  const dx = [1, 0, -1, 0];
+  const dy = [0, 1, 0, -1];
+
+  for (let i = 0; i < 4; i++) {
+    width += dfs(x + dx[i], y + dy[i]);
+  }
+
+  return width;
+}
 
 for (let j = 0; j < n; j++) {
   for (let i = 0; i < m; i++) {
-    if (map[j][i] == 1) {
-      width = 0;
+    if (map[j][i] === 1) {
       cnt++;
-      dfs(j, i);
-      max_width = Math.max(max_width, width);
+      max_width = Math.max(max_width, dfs(j, i));
     }
   }
 }
 
-console.log(cnt + "\n" + max_width);
-
-function dfs(x, y) {
-  if (x < 0 || y < 0 || x > n - 1 || y > m - 1) return;
-
-  if (map[x][y] == 1) {
-    width++;
-    map[x][y] = 0;
-    dfs(x, y + 1);
-    dfs(x, y - 1);
-    dfs(x + 1, y);
-    dfs(x - 1, y);
-  }
-}
+console.log(cnt);
+console.log(max_width);
